@@ -31,6 +31,9 @@ namespace MiniPaint
                 {
                     //Setting the Pen BackColor and line Width
                     Pen p = new Pen(btn_PenColor.BackColor, float.Parse(cmb_PenSize.Text));
+                    p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+                    p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+                    p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
                     //Drawing the line.
                     g.DrawLine(p, e.X, e.Y, e.X + 1, e.Y + 1);
                     pictureBox1.Image = DrawArea;
