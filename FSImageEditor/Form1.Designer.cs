@@ -1,4 +1,4 @@
-﻿namespace MiniPaint
+﻿namespace FSImageEditor
 {
     partial class Form1
     {
