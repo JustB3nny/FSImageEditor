@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
 
-namespace MiniPaint
+namespace FSImageEditor
 {
 	public partial class Form1 : Form
 	{
@@ -23,7 +23,7 @@ namespace MiniPaint
 		bool drawRectangle = false;
 		bool drawCircle = false;
 		//Event fired when the mouse pointer is moved over the picturebox.
-		private void Pnl_Draw_MouseMove(object sender, MouseEventArgs e)
+		private void Draw_MouseMove(object sender, MouseEventArgs e)
 		{
 			if(startPaint)
 			{
@@ -58,7 +58,7 @@ namespace MiniPaint
 			}
 		}
 		//Event Fired when the mouse pointer is over picturebox and a mouse button is pressed
-		private void Pnl_Draw_MouseDown(object sender, MouseEventArgs e)
+		private void Draw_MouseDown(object sender, MouseEventArgs e)
 		{
 			startPaint = true;
 			using (g = Graphics.FromImage(DrawArea))
@@ -87,13 +87,13 @@ namespace MiniPaint
 				}
 			}
 		}
-		//Fired when the mouse pointer is over the picturebox and a mouse button is released.
-		void Pnl_Draw_MouseUp(object sender, MouseEventArgs e)
+		//Stops drawing when the mouse pointer is over the picturebox and a mouse button is released.
+		void Draw_MouseUp(object sender, MouseEventArgs e)
 		{
 			startPaint = false;
 		}
 		//Button for Setting pen Color
-		void Button1_Click(object sender, EventArgs e)
+		void Btn_PenColor_Click(object sender, EventArgs e)
 		{
 			//Open Color Dialog and Set BackColor of btn_PenColor if user click on OK
 			ColorDialog c = new ColorDialog();
@@ -102,7 +102,7 @@ namespace MiniPaint
 				btn_PenColor.BackColor = c.Color;
 			}
 		}
-		//New
+		//New & load
 		void BlankCanvasToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Blank();
@@ -204,15 +204,16 @@ namespace MiniPaint
 			FillPictureBox(pictureBox1, test);
 			DrawArea = new Bitmap(pictureBox1.Image);
 		}
+		//Toggles eraser
 		void _buttEraseClick(object sender, EventArgs e)
 		{
 			if (!erase){
 				erase = true;
-				_buttErase.BackColor = Color.IndianRed;
+				btn_Erase.BackColor = Color.IndianRed;
 			}
 			else {
 				erase = false;
-				_buttErase.BackColor = Color.Silver;
+				btn_Erase.BackColor = Color.Silver;
 			}
 		}
 		Bitmap MergedBitmaps(Bitmap bmp1, Bitmap bmp2) {
@@ -225,5 +226,3 @@ namespace MiniPaint
 		}
 	}
 }
-
-
